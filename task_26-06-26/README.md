@@ -46,9 +46,4 @@ for value in gen_func():
     print(value)
 ```
 
-## Tips for Students
 
-- A list comprehension is a short way to write a `for` loop that makes a list.
-- A dictionary comprehension works the same but creates a dictionary.
-- Generators use `yield` and produce values one by one.
-- Practice by changing the lists and seeing how the output changes.
