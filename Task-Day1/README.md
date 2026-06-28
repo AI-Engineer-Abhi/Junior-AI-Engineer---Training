@@ -45,5 +45,8 @@ def gen_func():
 for value in gen_func():
     print(value)
 ```
+<<<<<<< HEAD:Task-Day1/README.md
 
 
+=======
+>>>>>>> 4c868a248cada9b4567d25c9d2be0833d2c40362:task_26-06-26/README.md
