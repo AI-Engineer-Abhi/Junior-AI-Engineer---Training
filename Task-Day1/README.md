@@ -1,52 +1,27 @@
-# Task 26-06-26
+# Task-Day1
 
-This folder contains simple, student-friendly Python examples for learning list comprehensions, dictionary comprehensions, and generators.
+This folder contains simple Python examples for practicing core concepts such as list comprehensions, dictionary comprehensions, and generators.
 
-## Files and What They Teach
+## Files in this folder
 
-- `dictionary_comprehension.py`
-  - Builds a nested student marks dictionary using a dictionary comprehension.
-  - Creates a number-to-letter mapping using `zip()`.
-  - Great for learning how to make dictionaries in one line.
+- [dictionary_comprehension.py](dictionary_comprehension.py)
+  - Shows how to create a dictionary using a dictionary comprehension.
+  - Demonstrates mapping numbers to letters with `zip()`.
 
-- `generator.py`
-  - Uses a generator expression to square only even numbers from a nested list.
-  - Shows a generator function that yields square values one at a time.
-  - Good for understanding lazy evaluation and `yield`.
+- [generator.py](generator.py)
+  - Uses a generator expression to square only even numbers.
+  - Includes a generator function that uses `yield`.
 
-- `list_comprehension.py`
-  - Extracts even numbers from a 2D list using a list comprehension.
-  - Flattens a 2D list into a single list in one line.
-  - Helps practice compact loops and filtering.
+- [list_comprehension.py](list_comprehension.py)
+  - Demonstrates how to filter even numbers from a nested list.
+  - Shows how to flatten a 2D list into a single list.
 
-## Example Snippets
+## Learning goals
 
-### Dictionary comprehension
-```python
-students = ["Alice", "Bob"]
-subjects = ["Math", "Science"]
-marks = {student: {subject: 0 for subject in subjects} for student in students}
-print(marks)
-```
-
-### List comprehension with condition
-```python
-matrix = [[1, 2, 3], [4, 5, 6], [7, 8, 9]]
-even_nums = [n for row in matrix for n in row if n % 2 == 0]
-print(even_nums)
-```
-
-### Generator function
-```python
-def gen_func():
-    for i in range(5):
-        yield i ** 2
-
-for value in gen_func():
-    print(value)
-```
-<<<<<<< HEAD:Task-Day1/README.md
+By working through these files, I learned:
+- How to write compact loops with compreh will learn:
+ensions
+- How to build dictionaries efficiently
+- How generators work and why they are memory-friendly
 
 
-=======
->>>>>>> 4c868a248cada9b4567d25c9d2be0833d2c40362:task_26-06-26/README.md
