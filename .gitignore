@@ -1,4 +1,24 @@
+# Virtual environment
 .venv/
+
+# Python cache
 __pycache__/
 *.pyc
+
+# VS Code
 .vscode/
+
+# Environment variables
+.env
+.env.*
+
+# Secrets
+*.key
+*.pem
+secrets/
+
+# Large datasets
+data/
+
+# Node.js (if you ever use it)
+node_modules/
