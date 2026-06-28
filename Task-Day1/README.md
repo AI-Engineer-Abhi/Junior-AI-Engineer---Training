@@ -19,8 +19,7 @@ This folder contains simple Python examples for practicing core concepts such as
 ## Learning goals
 
 By working through these files, I learned:
-- How to write compact loops with compreh will learn:
-ensions
+- How list comprehensions are used.
 - How to build dictionaries efficiently
 - How generators work and why they are memory-friendly
 
