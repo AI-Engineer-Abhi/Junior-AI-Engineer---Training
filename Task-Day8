@@ -1,0 +1,253 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "selectedAiContext": "learn_mode",
+      "authorship_tag": "ABX9TyO0GZAUKSvotUXo2BzA8Xuy",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    },
+    "language_info": {
+      "name": "python"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/AI-Engineer-Abhi/Junior-AI-Engineer---Training/blob/main/Task-Day8\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "Remote Job Market Analyzer using\n",
+        "Python Web Scraping"
+      ],
+      "metadata": {
+        "id": "aWdMSX-ZDqcb"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import pandas as pd\n",
+        "import requests\n",
+        "from bs4 import BeautifulSoup\n",
+        "\n",
+        "url = \"https://realpython.github.io/fake-jobs/\"\n",
+        "\n",
+        "response = requests.get(url)\n",
+        "\n",
+        "print(\"Status Code:\", response.status_code)\n",
+        "\n",
+        "soup = BeautifulSoup(response.text, \"html.parser\")\n",
+        "\n",
+        "jobs = soup.find_all(\"div\", class_=\"card-content\")\n",
+        "\n",
+        "data = []\n",
+        "\n",
+        "for job in jobs:\n",
+        "\n",
+        "    title = job.find(\"h2\", class_=\"title\").text.strip()\n",
+        "\n",
+        "    company = job.find(\"h3\", class_=\"company\").text.strip()\n",
+        "\n",
+        "    location = job.find(\"p\", class_=\"location\").text.strip()\n",
+        "\n",
+        "    apply_link = job.find_all(\"a\")[1][\"href\"]\n",
+        "\n",
+        "    data.append({\n",
+        "        \"Job Title\": title,\n",
+        "        \"Company Name\": company,\n",
+        "        \"Skills\": \"Not Available\",\n",
+        "        \"Salary\": \"Not Available\",\n",
+        "        \"Location\": location,\n",
+        "        \"Posting Date\": \"Not Available\",\n",
+        "        \"Apply Link\": apply_link\n",
+        "    })\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "print(df)\n",
+        "\n",
+        "df.to_csv(\"jobs.csv\", index=False)\n",
+        "\n",
+        "print(\"CSV Saved Successfully\")"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "oMT5QTLmNqwO",
+        "outputId": "76167e4a-e738-4b84-8ddb-115558becfed"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Status Code: 200\n",
+            "                             Job Title                Company Name  \\\n",
+            "0              Senior Python Developer    Payne, Roberts and Davis   \n",
+            "1                      Energy engineer            Vasquez-Davidson   \n",
+            "2                      Legal executive  Jackson, Chambers and Levy   \n",
+            "3               Fitness centre manager              Savage-Bradley   \n",
+            "4                      Product manager                 Ramirez Inc   \n",
+            "..                                 ...                         ...   \n",
+            "95  Museum/gallery exhibitions officer     Nguyen, Yoder and Petty   \n",
+            "96            Radiographer, diagnostic                  Holder LLC   \n",
+            "97              Database administrator              Yates-Ferguson   \n",
+            "98                  Furniture designer             Ortega-Lawrence   \n",
+            "99                         Ship broker   Fuentes, Walls and Castro   \n",
+            "\n",
+            "           Skills         Salary              Location   Posting Date  \\\n",
+            "0   Not Available  Not Available       Stewartbury, AA  Not Available   \n",
+            "1   Not Available  Not Available  Christopherville, AA  Not Available   \n",
+            "2   Not Available  Not Available   Port Ericaburgh, AA  Not Available   \n",
+            "3   Not Available  Not Available     East Seanview, AP  Not Available   \n",
+            "4   Not Available  Not Available   North Jamieview, AP  Not Available   \n",
+            "..            ...            ...                   ...            ...   \n",
+            "95  Not Available  Not Available      Lake Abigail, AE  Not Available   \n",
+            "96  Not Available  Not Available        Jacobshire, AP  Not Available   \n",
+            "97  Not Available  Not Available        Port Susan, AE  Not Available   \n",
+            "98  Not Available  Not Available     North Tiffany, AA  Not Available   \n",
+            "99  Not Available  Not Available     Michelleville, AP  Not Available   \n",
+            "\n",
+            "                                           Apply Link  \n",
+            "0   https://realpython.github.io/fake-jobs/jobs/se...  \n",
+            "1   https://realpython.github.io/fake-jobs/jobs/en...  \n",
+            "2   https://realpython.github.io/fake-jobs/jobs/le...  \n",
+            "3   https://realpython.github.io/fake-jobs/jobs/fi...  \n",
+            "4   https://realpython.github.io/fake-jobs/jobs/pr...  \n",
+            "..                                                ...  \n",
+            "95  https://realpython.github.io/fake-jobs/jobs/mu...  \n",
+            "96  https://realpython.github.io/fake-jobs/jobs/ra...  \n",
+            "97  https://realpython.github.io/fake-jobs/jobs/da...  \n",
+            "98  https://realpython.github.io/fake-jobs/jobs/fu...  \n",
+            "99  https://realpython.github.io/fake-jobs/jobs/sh...  \n",
+            "\n",
+            "[100 rows x 7 columns]\n",
+            "CSV Saved Successfully\n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "import requests\n",
+        "import pandas as pd\n",
+        "import re\n",
+        "\n",
+        "url = \"https://boards-api.greenhouse.io/v1/boards/stripe/jobs?content=true\"\n",
+        "\n",
+        "response = requests.get(url)\n",
+        "jobs = response.json()[\"jobs\"]\n",
+        "\n",
+        "data = []\n",
+        "\n",
+        "# Simple skill keywords\n",
+        "skill_keywords = [\n",
+        "    \"Python\", \"Java\", \"SQL\", \"AWS\", \"Docker\", \"Kubernetes\",\n",
+        "    \"TensorFlow\", \"PyTorch\", \"Machine Learning\", \"React\",\n",
+        "    \"Node.js\", \"JavaScript\", \"Git\", \"Linux\", \"Spark\"\n",
+        "]\n",
+        "\n",
+        "for job in jobs:\n",
+        "\n",
+        "    title = job.get(\"title\", \"\")\n",
+        "\n",
+        "    company = \"Stripe\"\n",
+        "\n",
+        "    location = job.get(\"location\", {}).get(\"name\", \"\")\n",
+        "\n",
+        "    posting_date = job.get(\"updated_at\", \"\")\n",
+        "\n",
+        "    apply_link = job.get(\"absolute_url\", \"\")\n",
+        "\n",
+        "    description = job.get(\"content\", \"\")\n",
+        "\n",
+        "    # Extract skills from description\n",
+        "    found_skills = []\n",
+        "    for skill in skill_keywords:\n",
+        "        if re.search(rf\"\\b{re.escape(skill)}\\b\", description, re.IGNORECASE):\n",
+        "            found_skills.append(skill)\n",
+        "\n",
+        "    skills = \", \".join(found_skills)\n",
+        "\n",
+        "\n",
+        "\n",
+        "    data.append({\n",
+        "        \"Job Title\": title,\n",
+        "        \"Company Name\": company,\n",
+        "        \"Skills\": skills,\n",
+        "        \"Location\": location,\n",
+        "        \"Posting Date\": posting_date,\n",
+        "        \"Apply Link\": apply_link\n",
+        "    })\n",
+        "\n",
+        "df = pd.DataFrame(data)\n",
+        "\n",
+        "print(df.head())\n",
+        "\n",
+        "# df.to_csv(\"jobs.csv\", index=False)"
+      ],
+      "metadata": {
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "id": "NwFxsZ_YRjxH",
+        "outputId": "502edd75-ae3e-47c4-9e1a-2c033293dd02"
+      },
+      "execution_count": null,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "                                           Job Title Company Name Skills  \\\n",
+            "0               Account Executive, AI Sales (Grower)       Stripe          \n",
+            "1  Account Executive, Commercial Grower (Japanese...       Stripe    SQL   \n",
+            "2  Account Executive, Commercial Hunter (Japanese...       Stripe    SQL   \n",
+            "3              Account Executive, Cross Border China       Stripe          \n",
+            "4             Account Executive - Enterprise, Grower       Stripe          \n",
+            "\n",
+            "                                            Location  \\\n",
+            "0                                  San Francisco, CA   \n",
+            "1                                              Japan   \n",
+            "2                                              Japan   \n",
+            "3                                          Singapore   \n",
+            "4  US-Remote, US-San Francisco, US-Chicago, US-Ne...   \n",
+            "\n",
+            "                Posting Date                                     Apply Link  \n",
+            "0  2026-06-26T17:05:44-04:00  https://stripe.com/jobs/search?gh_jid=7954688  \n",
+            "1  2026-07-02T21:13:43-04:00  https://stripe.com/jobs/search?gh_jid=8042978  \n",
+            "2  2026-07-02T21:14:52-04:00  https://stripe.com/jobs/search?gh_jid=7789539  \n",
+            "3  2026-06-26T17:05:39-04:00  https://stripe.com/jobs/search?gh_jid=7893199  \n",
+            "4  2026-07-01T10:19:50-04:00  https://stripe.com/jobs/search?gh_jid=7993151  \n"
+          ]
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "source": [],
+      "metadata": {
+        "id": "qQI7zyDUS8_E"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ]
+}
