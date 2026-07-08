@@ -1,0 +1,3 @@
+Name:Maanya
+Age:22
+Course:AIML
