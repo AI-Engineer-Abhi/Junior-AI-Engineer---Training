@@ -20,4 +20,4 @@ data/
 # Node.js (if you ever use it)
 node_modules/
 
-.claude/
+.claude/settings.local.json
