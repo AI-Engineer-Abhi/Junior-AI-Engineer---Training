@@ -1,0 +1,7 @@
+streamlit
+requests
+transformers==4.46.3
+tokenizers==0.20.3
+huggingface_hub<1.0
+torch
+sentencepiece
